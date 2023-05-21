@@ -108,7 +108,7 @@ Then next to each Pet's name I see a button to "Adopt this Pet"
 When I click one of these buttons
 Then I am taken back to the application show page
 And I see the Pet I want to adopt listed on this application
-[ ] done
+[x] done
 
 6. Submit an Application
 
@@ -123,7 +123,7 @@ Then I am taken back to the application's show page
 And I see an indicator that the application is "Pending"
 And I see all the pets that I want to adopt
 And I do not see a section to add more pets to this application
-[ ] done
+[x] done
 
 7. No Pets on an Application
 
@@ -134,7 +134,7 @@ Then I do not see a section to submit my application
 Database Logic Part 1
 These stories emphasize key database concepts.
 
-[ ] done
+[x] done
 
 8. Partial Matches for Pet Names
 
