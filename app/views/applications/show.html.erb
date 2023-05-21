@@ -1,26 +1,38 @@
 
-  <p>Name: <%= @application.name %></p>
-  <p>Street Address: <%= @application.address %></p>
-  <p>City: <%= @application.city %></p>
-  <p>State: <%= @application.state %></p>
-  <p>Zip Code: <%= @application.zip_code%></p>
-  <p>Why I would be a good pet owner: <%= @application.description%></p>
-  <p>Status: <%= @application.status %></p>
-
-
-<% if @application.status == "In Progress" %>
-<h2>Add a Pet to this Application</h2>
-<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
-<%= form.label :search, "Search for Pet" %>
-<%= form.text_field :search %>
-<%= form.submit "Search" %>
+<p>Name: <%= @application.name %></p>
+<p>Street Address: <%= @application.address %></p>
+<p>City: <%= @application.city %></p>
+<p>State: <%= @application.state %></p>
+<p>Zip Code: <%= @application.zip_code%></p>
+<p>Why I would be a good pet owner: <%= @application.description%></p>
+<% @application.pets.each do |pet| %>
+  <p>Pets on this Application: <%= link_to pet.name, "/pets/#{pet.id}" %></p>
 <% end %>
+<p>Status: <%= @application.status %></p>
+
+  <% if @application.status == "In Progress" %>
+    <h2>Add a Pet to this Application</h2>
+    <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |form| %>
+    <%= form.label :search, "Search for Pet" %>
+    <%= form.text_field :search %>
+    <%= form.submit "Search" %>
+  <% end %>
 
 <% if @pets != nil %>
   <% @pets.each do |pet| %>
-      <%= pet.name %>
-          <%= button_to "Adopt this Pet", action: "update", :pet_id => pet.id %>
+    <%= pet.name %>
+      <%= button_to "Adopt this Pet", action: "update", :pet_id => pet.id %>
     <% end %>
   <% end %>
 <% end %>  
+
+<% if @application.pets != [] %>
+  <h1>Submit Application</h1>
+  <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |form| %>
+  <%= form.label :good_owner, "Why I would be a good pet owner:" %>
+  <%= form.text_field :good_owner, required: true %>
+  <%= button_to "Submit Application", action: "update", :good_owner => @application.description%>
+  <% end %>
+<% end %>
+
 

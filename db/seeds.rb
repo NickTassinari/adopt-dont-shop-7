@@ -14,3 +14,4 @@ Shelter.destroy_all
 
           shelter = Shelter.create!(foster_program: true, name: "Rickys used pets", city: "Sunnyvale", rank: 1)
           zappa = shelter.pets.create!(adoptable: true, age: 4, breed: "poodle", name: "Francesco Zappa")
+          bowser = shelter.pets.create!(adoptable: true, age: 4, breed: "big chonk", name: "Bowser")

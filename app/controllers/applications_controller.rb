@@ -24,6 +24,7 @@ class ApplicationsController < ApplicationController
     application = Application.find(params[:id])
     if params[:good_owner] == nil
       pet = Pet.find(params[:pet_id])
+      PetsApplication.create!(application_id: application.id, pet_id: pet.id)
     else 
       application.update(status: "Pending")
       application.save
