@@ -143,7 +143,7 @@ When I visit an application show page
 And I search for Pets by name
 Then I see any pet whose name PARTIALLY matches my search
 For example, if I search for "fluff", my search would match pets with names "fluffy", "fluff", and "mr. fluff"
-[ ] done
+[x] done
 
 9. Case Insensitive Matches for Pet Names
 
@@ -152,7 +152,7 @@ When I visit an application show page
 And I search for Pets by name
 Then my search is case insensitive
 For example, if I search for "fluff", my search would match pets with names "Fluffy", "FLUFF", and "Mr. FlUfF"
-[ ] done
+[x] done
 
 SQL Only Story
 
