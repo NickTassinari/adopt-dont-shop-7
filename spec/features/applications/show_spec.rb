@@ -55,6 +55,8 @@ RSpec.describe "Application show page" do
         expect(page).to have_content("Francesco Zappa")
         expect(current_path).to eq("/applications/#{@joey.id}")
       end
+     
+      #user story 5
 
       it "after we search for a pet, there's a button to adopt the pet" do
         shelter = Shelter.create!(foster_program: true, name: "Rickys used pets", city: "Sunnyvale", rank: 1)
@@ -67,6 +69,34 @@ RSpec.describe "Application show page" do
         expect(page).to have_content("Francesco Zappa")
         click_button "Adopt this Pet"
         expect(current_path).to eq("/applications/#{@joey.id}")
+        expect(page).to have_content("Pets on this Application: #{zappa.name}")
+      end
+
+      #user story 6
+
+      it 'allows visitor to submit application and change status to pending' do 
+        shelter = Shelter.create!(foster_program: true, name: "Rickys used pets", city: "Sunnyvale", rank: 1)
+        zappa = shelter.pets.create!(adoptable: true, age: 4, breed: "poodle", name: "Francesco Zappa")
+        bowser = shelter.pets.create!(adoptable: true, age: 4, breed: "big chonk", name: "Bowser")
+        
+        visit "/applications/#{@joey.id}"
+        fill_in :search, with: "Bowser"
+        click_on "Search"
+        click_button "Adopt this Pet"
+
+        fill_in :search, with: "Francesco Zappa"
+        click_on "Search"
+        click_button "Adopt this Pet"
+        
+        expect(page).to have_content("Pets on this Application: Bowser")
+        expect(page).to have_content("Pets on this Application: Francesco Zappa")
+        expect(page).to have_content("Why I would be a good pet owner:")
+        fill_in("good_owner", with: "I like turtles")
+        click_button "Submit Application"
+
+        expect(current_path).to eq("/applications/#{@joey.id}")
+        expect(page).to have_content("Status: Pending")
+        expect(page).to_not have_content("Add a Pet to this Application")
       end
     end
   end
