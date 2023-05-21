@@ -100,12 +100,63 @@ RSpec.describe "Application show page" do
       end
 
       # user story 7
-      
+
       it "will not display Submit Application button if pets are not added to application" do
         visit "/applications/#{@joey.id}"
 
         expect(page).not_to have_content("Submit Application")
       end
+
+      # user story 8
+
+      it "returns partial matches for the search" do
+        shelter = Shelter.create!(foster_program: true, name: "Rickys used pets", city: "Sunnyvale", rank: 1)
+        zappa = shelter.pets.create!(adoptable: true, age: 4, breed: "poodle", name: "Francesco Zappa")
+        d_zappa = shelter.pets.create!(adoptable: true, age: 2, breed: "mini poodle", name: "Droolzle Zappa")
+
+        bowser = shelter.pets.create!(adoptable: true, age: 4, breed: "big chonk", name: "Bowser")
+        l_bowser = shelter.pets.create!(adoptable: true, age: 2, breed: "lil chonk", name: "Little Bowser")
+
+        visit "/applications/#{@joey.id}"
+        fill_in :search, with: "Zapp"
+        click_on "Search"
+
+        expect(page).to have_content(zappa.name)
+        expect(page).to have_content(d_zappa.name)
+
+        visit "/applications/#{@joey.id}"
+        fill_in :search, with: "Bow"
+        click_on "Search"
+
+        expect(page).to have_content(bowser.name)
+        expect(page).to have_content(l_bowser.name)
+      end
+
+      # user story 9
+
+      it "is case insensitive for the search" do
+        shelter = Shelter.create!(foster_program: true, name: "Rickys used pets", city: "Sunnyvale", rank: 1)
+        zappa = shelter.pets.create!(adoptable: true, age: 4, breed: "poodle", name: "Francesco Zappa")
+        d_zappa = shelter.pets.create!(adoptable: true, age: 2, breed: "mini poodle", name: "Droolzle Zappa")
+
+        bowser = shelter.pets.create!(adoptable: true, age: 4, breed: "big chonk", name: "Bowser")
+        l_bowser = shelter.pets.create!(adoptable: true, age: 2, breed: "lil chonk", name: "Little Bowser")
+
+        visit "/applications/#{@joey.id}"
+        fill_in :search, with: "z"
+        click_on "Search"
+
+        expect(page).to have_content(zappa.name)
+        expect(page).to have_content(d_zappa.name)
+
+        visit "/applications/#{@joey.id}"
+        fill_in :search, with: "b"
+        click_on "Search"
+
+        expect(page).to have_content(bowser.name)
+        expect(page).to have_content(l_bowser.name)
+      end
+
     end
   end
 end
