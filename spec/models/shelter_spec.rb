@@ -21,6 +21,15 @@ RSpec.describe Shelter, type: :model do
     @pet_2 = @shelter_1.pets.create(name: "Clawdia", breed: "shorthair", age: 3, adoptable: true)
     @pet_3 = @shelter_3.pets.create(name: "Lucille Bald", breed: "sphynx", age: 8, adoptable: true)
     @pet_4 = @shelter_1.pets.create(name: "Ann", breed: "ragdoll", age: 5, adoptable: true)
+
+    @joey = Application.create!(name: "Joey", address: "73 Shifty St", city: "Oakland", state: "MA", zip_code: "09342", description: "I'm a good people, totally not robot", status: "Pending" )
+    @lars = Application.create!(name: "Lars Fredrickson", address: "73 Shifty St", city: "Oakland", state: "MA", zip_code: "09342", description: "I'm a good people, totally not robot", status: "Pending" )
+    @matt = Application.create!(name: "Matt Freeman", address: "73 Shifty St", city: "Oakland", state: "MA", zip_code: "09342", description: "I'm a good people, totally not robot", status: "In Progress" )
+    @tim = Application.create!(name: "Tim Armstrong", address: "73 Shifty St", city: "Oakland", state: "MA", zip_code: "09342", description: "Mohawk", status: "Rejected" )
+
+    @pet_app_1 = @joey.pets_applications.create!(pet_id: @pet_1.id, pet_status: @pet_1.adoptable)
+    @pet_app_2 = @lars.pets_applications.create!(pet_id: @pet_3.id, pet_status: @pet_3.adoptable)
+    @pet_app_3 = @tim.pets_applications.create!(pet_id: @pet_2.id,pet_status: @pet_2.adoptable)
   end
 
   describe "class methods" do
@@ -43,10 +52,16 @@ RSpec.describe Shelter, type: :model do
     end
 
     # user story 10
-    
+
     describe "#sort_name_desc" do
       it 'orders shelters by name, alphabetically in descending order' do
         expect(Shelter.sort_name_desc).to eq([@shelter_2, @shelter_3, @shelter_1])
+      end
+    end
+
+    describe '#pending_applications' do
+      it "lists all the shelters with pending applications status" do
+        expect(Shelter.pending_applications).to eq([@shelter_1, @shelter_3])
       end
     end
   end
