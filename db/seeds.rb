@@ -1,5 +1,6 @@
-Application.destroy_all
+PetsApplication.destroy_all
 Pet.destroy_all
+Application.destroy_all
 VeterinaryOffice.destroy_all
 Veterinarian.destroy_all
 Shelter.destroy_all
