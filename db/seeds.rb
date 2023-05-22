@@ -18,3 +18,7 @@ zappa = shelter.pets.create!(adoptable: true, age: 4, breed: "poodle", name: "Fr
 d_zappa = shelter.pets.create!(adoptable: true, age: 2, breed: "mini poodle", name: "Droolzle Zappa")
 bowser = shelter.pets.create!(adoptable: true, age: 4, breed: "big chonk", name: "Bowser")
 l_bowser = shelter.pets.create!(adoptable: true, age: 2, breed: "lil chonk", name: "Little Bowser")
+
+shelter1 = Shelter.create!(foster_program: true, name: "Do Again Pets", city: "Barne", rank: 1)
+shelter2 = Shelter.create!(foster_program: true, name: "Rickys used pets", city: "Sunnyvale", rank: 1)
+shelter3 = Shelter.create!(foster_program: true, name: "Not Ricky's re-used pets", city: "Orange", rank: 1)
