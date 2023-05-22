@@ -163,7 +163,7 @@ For this story, you should write your queries in raw sql. You can use the Active
 As a visitor
 When I visit the admin shelter index ('/admin/shelters')
 Then I see all Shelters in the system listed in reverse alphabetical order by name
-[ ] done
+[x] done
 
 For this story, you should fully leverage ActiveRecord methods in your query.
 
