@@ -1,0 +1,7 @@
+<%# <% @applications.each do |app| %>
+  <% if @applications.status == "Pending" %>
+    <p>Applicant Name: <%= @applications.name %>
+    <p>Application Status: <%= @applications.status %>
+    <%= button_to "Approve Application", action: "update", @applications.status => "Approved"%>
+  <% end %>
+<%# <% end %>
