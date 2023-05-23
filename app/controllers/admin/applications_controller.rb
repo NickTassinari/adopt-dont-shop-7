@@ -1,13 +1,16 @@
 class Admin::ApplicationsController < ApplicationController
-  def show 
+  def show
     @applications = Application.find(params[:id])
   end
 
-  def update 
+  def update
     @applications = Application.find(params[:id])
-    @applications.update(status: "Approved")
-    @applications.save
-    redirect_to "/admin/applications/#{@applications.id}"
-    flash[:success] = "Application Approved"
+    if params[:approval] == "approved"
+      @applications.update(status: "Approved")
+      render :show
+    else
+      @applications.update(status: "Rejected")
+      render :show
+    end
   end
 end
