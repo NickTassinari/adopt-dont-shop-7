@@ -8,3 +8,25 @@
 <p>Description: <%= applicant.description %></p>
 <p>Status: <%= @application.status %></p>
 <% end %>
+
+
+<% if @applications.status == "Approved" %>
+  <p> Application Approved </p>
+<% end %>
+
+
+def update
+  @applications = Application.find(params[:id])
+  if params[:approval] == "approved"
+  @applications.update(status: "Approved")
+  # @applications.save
+  # redirect_to "/admin/applications/#{@applications.id}"
+    render :show
+  else
+    @applications.update(status: "Rejected")
+    # @applications.save
+    # redirect_to "/admin/applications/#{@applications.id}"
+    render :show
+  end
+
+end
