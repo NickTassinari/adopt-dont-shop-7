@@ -30,3 +30,41 @@ def update
   end
 
 end
+
+# <%= form_with url: "/shelters/#{@shelter.id}/pets", method: :post, local: true do |f| %>
+#   <%= f.label :name %>
+#   <%= f.text_field :name %>
+
+#   <%= f.label :breed %>
+#   <%= f.text_field :breed %>
+
+#   <%= f.label :age %>
+#   <%= f.number_field :age %>
+
+#   <%= f.label :adoptable %>
+#   <%= f.check_box :adoptable %>
+
+#   <%= f.submit %>
+# <% end %>
+
+
+<%= render partial "new_edit", locals:{
+  path: "/pets/#{@pet.id}",
+  method: :patch,
+} %>
+
+# <%= form_with url: "/pets/#{@pet.id}", method: :patch, local: true do |f| %>
+#   <%= f.label :name %>
+#   <%= f.text_field :name %>
+
+#   <%= f.label :breed %>
+#   <%= f.text_field :breed %>
+
+#   <%= f.label :adoptable %>
+#   <%= f.check_box :adoptable %>
+
+#   <%= f.label :age %>
+#   <%= f.number_field :age %>
+
+#   <%= f.submit %>
+# <% end %>
