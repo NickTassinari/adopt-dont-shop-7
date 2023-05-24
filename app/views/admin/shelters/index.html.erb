@@ -1,10 +1,11 @@
+<h1>Shelters</h1>
 <% @shelters.each do |shelter| %>
   <ul>
     <li><%= shelter.name %></li>
   </ul>
 <% end %>
 
-<h3> Pending Applications </h3>
+<h3> Shelters with Pending Pet Applications </h3>
 <ul id= "pending_shelters">
 <% @shelts.each do |shelt| %>
   <p><%= shelt.name %></p>
