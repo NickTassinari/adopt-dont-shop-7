@@ -1,8 +1,15 @@
 <% if @applications.status == "Pending" %>
   <p>Applicant Name: <%= @applications.name %></p>
   <p>Application Status: <%= @applications.status %></p>
-  <%= button_to "Approve", action: "update", :approval => "approved" %>
-  <%= button_to "Reject", action: "update", :approval => "rejected" %>
+  <% @pets.each do |pet| %>
+    <% if pet.adoptable == true %>
+      <ul>
+      <li><%= pet.name %></li>
+      <li><%= button_to "Approve", action: "update", :approval => "approved" %></li>
+      <li><%= button_to "Reject", action: "update", :approval => "rejected" %></li>
+      </ul>
+    <% end %>
+  <% end  %>
 <% end %>
 
 <% if @applications.status == "Approved" %>
