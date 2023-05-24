@@ -28,7 +28,7 @@ RSpec.describe "Admin Applications Show Page" do
         click_button "Approve"
         expect(current_path).to eq("/admin/applications/#{@joey.id}")
         expect(page).to_not have_content("Approve")
-        expect(page).to have_content("Application Accepted")
+        expect(page).to have_content("Application for #{@pet_1.name} Accepted")
       end
 
       it "Has a button to reject the application for the specific pet" do
@@ -52,7 +52,7 @@ RSpec.describe "Admin Applications Show Page" do
         expect(current_path).to eq("/admin/applications/#{@lars.id}")
         expect(page).to_not have_content("Approve")
         expect(page).to_not have_content("Reject")
-        expect(page).to have_content("Application Denied")
+        expect(page).to have_content("Application for #{@pet_2.name} Denied")
       end
 
         # User Story 14

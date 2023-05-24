@@ -9,10 +9,10 @@ class Admin::ApplicationsController < ApplicationController
     if params[:approval] == "approved"  
       @applications.update(status: "Approved")
       @applications.pets.update(adoptable: false)
-      render :show
+      redirect_to "/admin/applications/#{@applications.id}"
     else
       @applications.update(status: "Rejected")
-      render :show
+      redirect_to "/admin/applications/#{@applications.id}"
     end
   end
 end

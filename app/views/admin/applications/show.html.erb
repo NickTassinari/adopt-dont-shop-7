@@ -13,9 +13,13 @@
 <% end %>
 
 <% if @applications.status == "Approved" %>
-  <p> Application Accepted </p>
+  <% @applications.pets.each do |pet| %>
+    <p> Application for <%= pet.name %> Accepted </p>
+  <% end %>
 <% end %>
 
 <% if @applications.status == "Rejected" %>
-  <p> Application Denied </p>
+  <% @applications.pets.each do |pet| %>
+    <p> Application for <%= pet.name %> Denied </p>
+  <% end %>
 <% end %>
